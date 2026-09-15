@@ -20,3 +20,9 @@ Two Services exist in namespace `gw-lab`: `orders-v1` and `orders-v2`, both serv
 - `curl -H "x-canary: true" <gw-ip>/orders` is served by `orders-v2`.
 - `curl <gw-ip>/orders` (no header) is served by `orders-v1`.
 - The `HTTPRoute` shows `Accepted: True` and `ResolvedRefs: True` in its status conditions.
+
+## Official documentation
+
+- Gateway API concept — https://kubernetes.io/docs/concepts/services-networking/gateway/
+- HTTPRoute reference — https://gateway-api.sigs.k8s.io/reference/api-types/httproute/
+- Ingress (for contrast with Gateway API) — https://kubernetes.io/docs/concepts/services-networking/ingress/

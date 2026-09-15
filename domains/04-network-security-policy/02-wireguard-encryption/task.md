@@ -12,3 +12,7 @@ Enable transparent node-to-node encryption for all pod traffic crossing node bou
 - `cilium-dbg status` reports encryption as WireGuard and Enabled on every node.
 - Cross-node pod-to-pod traffic is encrypted in transit (verifiable by packet capture showing WireGuard UDP traffic between node IPs rather than cleartext pod traffic).
 - Same-node pod-to-pod traffic is unaffected (WireGuard only protects traffic that actually crosses the node boundary).
+
+## Official documentation
+
+- Cilium WireGuard node-to-node encryption — https://docs.cilium.io/en/stable/security/network/encryption-wireguard/

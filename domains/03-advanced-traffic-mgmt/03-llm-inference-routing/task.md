@@ -24,3 +24,9 @@ Given a cluster with KServe (v0.16+) and the Gateway API Inference Extension alr
 - `kubectl get llminferenceservice` shows your service `Ready`.
 - An `InferencePool` and its Endpoint Picker (scheduler) exist and are healthy.
 - Repeated requests carrying the same conversation context are observably routed with cache locality in mind (same backend where possible), rather than round-robin.
+
+## Official documentation
+
+- KServe LLMInferenceService overview — https://kserve.github.io/website/docs/model-serving/generative-inference/llmisvc/llmisvc-overview
+- Gateway API Inference Extension — https://gateway-api-inference-extension.sigs.k8s.io/
+- Gateway API concept — https://kubernetes.io/docs/concepts/services-networking/gateway/

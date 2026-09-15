@@ -12,3 +12,8 @@ Security asked for evidence of exactly which connections are being blocked by th
 1. Enable Hubble flow export to a persistent, queryable log (not just `hubble observe` live-tailing, which loses history on restart).
 2. Produce a filtered view showing only `DROPPED` verdicts in `secure-app`.
 3. Identify, from the logs alone, which specific pod-to-pod pair is being denied by which policy.
+
+## Official documentation
+
+- Cilium/Hubble metrics — https://docs.cilium.io/en/stable/observability/metrics/
+- Resource usage monitoring — https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/

@@ -18,3 +18,8 @@ Configure CoreDNS so that:
 - `dig ext-ai.com` from inside a pod returns a real answer via `1.1.1.1`.
 - `dig kubernetes.default.svc.cluster.local` still resolves the API server ClusterIP.
 - `dig google.com` (or another ordinary external name) still resolves via the default upstream.
+
+## Official documentation
+
+- Custom nameservers / CoreDNS — https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/
+- DNS debugging & resolution — https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/

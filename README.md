@@ -48,6 +48,29 @@ Each scenario folder follows the same four files:
 
 CKNE assumes CKA-level cluster administration. If `kubectl`, namespaces, Deployments, and Services aren't already second nature, do CKA-level prep first — this repo does not re-teach cluster administration.
 
+### Required tooling
+
+| Tool | Used for | Check it's ready |
+|---|---|---|
+| Docker Desktop (or Podman) | Container runtime backing every Kind node | `docker info` returns cluster/version data with no error |
+| [`kind`](https://kind.sigs.k8s.io/) | Local Kubernetes clusters | `kind version` |
+| `kubectl` | Talking to the cluster | `kubectl version --client` |
+| `helm` | Installing Cilium and other charts | `helm version` |
+| [`cilium` CLI](https://docs.cilium.io/en/stable/gettingstarted/k8s-install-default/#install-the-cilium-cli) | Enabling/checking Cilium features, ClusterMesh, status | `cilium version` |
+| `dig` / `nslookup` | DNS scenarios (Domain 2) | usually pre-installed on macOS/Linux; on Windows use WSL |
+| `git` | Cloning this repo and pushing your own fork | `git --version` |
+
+Optional but used in specific scenarios: `jq` (Domain 5 flow-log filtering), `openssl` (Domain 4 TLS scenario — generating a self-signed cert for the lab).
+
+**Docker/Podman must be running, not just installed** — `docker info` needs to succeed before `./bootstrap.sh` will work. On macOS/Windows this means the Docker Desktop app is actually open (`open -a Docker`, then wait for the whale icon to settle); on Linux it means the daemon service is started (`sudo systemctl start docker`). If you're on a managed/locked-down laptop and can't run Docker Desktop, `kind` also supports Podman as a drop-in: `export KIND_EXPERIMENTAL_PROVIDER=podman` before running `bootstrap.sh`.
+
+If `docker`/`kind`/etc. are installed but your shell says `command not found`, it's almost always a PATH issue rather than a missing install — confirm with `which docker` (or the relevant tool) and check the binary's actual location is on your `$PATH`, and remember to open a **new** terminal tab after any PATH change.
+
+### Required access
+
+- A GitHub account with either an SSH key registered (recommended: `ssh -T git@github.com` should greet you by username) or a Personal Access Token with `repo` scope, if you intend to push this repo or your own fork rather than just running it locally.
+- No cloud account (AWS/Azure/etc.) is required — every lab runs entirely on local Kind clusters.
+
 Tooling used across labs: `kind`, `docker`, `kubectl`, `helm`, `cilium` CLI, `dig`/`nslookup`, `iptables`, `tcpdump`. Some Domain 3/5 labs (Cilium ClusterMesh, egress gateway, Hubble, LLM inference routing) assume Cilium as the CNI rather than the manual bridge config used in Domain 1 — each `setup.sh` says which CNI state it expects.
 
 ## Getting started

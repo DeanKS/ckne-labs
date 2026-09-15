@@ -18,3 +18,9 @@ A `Deployment` named `web` (3 replicas, port 8080) exists in namespace `svc-lab`
 - `kubectl get endpointslices -l kubernetes.io/service-name=web-svc` lists exactly the ready pods.
 - 20 consecutive `curl` calls to the Service ClusterIP all succeed.
 - The readiness probe's `periodSeconds`/`failureThreshold` combination guarantees removal within 5s of a real failure.
+
+## Official documentation
+
+- Service concept — https://kubernetes.io/docs/concepts/services-networking/service/
+- Virtual IPs and Service proxies (kube-proxy modes) — https://kubernetes.io/docs/reference/networking/virtual-ips/
+- EndpointSlices — https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/

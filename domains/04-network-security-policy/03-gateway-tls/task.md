@@ -22,3 +22,11 @@
 - Plaintext HTTP to the same path either redirects to HTTPS or is disabled, per your design choice (state which you picked).
 - Gateway-to-backend hop uses TLS validated against the supplied CA bundle, not `insecureSkipVerify`.
 - `orders-v2`'s ServiceAccount cannot list Secrets or Pods outside its own namespace.
+
+## Official documentation
+
+- Gateway API TLS guide — https://gateway-api.sigs.k8s.io/guides/user-guides/tls/
+- BackendTLSPolicy reference — https://gateway-api.sigs.k8s.io/reference/api-types/policy/backendtlspolicy/
+- Configure a Pod's ServiceAccount — https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
+- RBAC reference — https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+- Cilium mutual authentication — https://docs.cilium.io/en/stable/network/servicemesh/mutual-authentication/mutual-authentication/

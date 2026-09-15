@@ -16,3 +16,7 @@ Configure a `CiliumEgressGatewayPolicy` so that all traffic from pods in `ai-wor
 - Traffic from `ai-workload` pods to `203.0.113.0/24` always shows source IP `10.168.60.100` at the destination.
 - Traffic to any other destination from the same pods is unaffected (still uses normal node-based SNAT).
 - If the gateway node goes down, `CiliumEgressGatewayPolicy` status reflects that egress for this policy is currently unavailable rather than silently failing over.
+
+## Official documentation
+
+- Cilium Egress Gateway — https://docs.cilium.io/en/latest/network/egress-gateway/

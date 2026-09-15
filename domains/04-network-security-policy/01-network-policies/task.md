@@ -21,3 +21,7 @@ Namespace `secure-app` has `frontend`, `backend`, and `db` deployments. Today an
 - `backend` can reach `db` on 5432; cannot reach anything else.
 - DNS still resolves inside every pod in the namespace.
 - External clients can still reach `frontend` on port 80.
+
+## Official documentation
+
+- NetworkPolicy concept — https://kubernetes.io/docs/concepts/services-networking/network-policies/

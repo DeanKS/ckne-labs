@@ -23,3 +23,9 @@ Do not restart the kubelet or container runtime as part of your fix — the CNI 
 - Its IP is inside `10.1.0.0/16`.
 - `cni0` exists on every node.
 - `net.core.somaxconn` is set to `500` inside the pod's network namespace.
+
+## Official documentation
+
+- Network plugins (CNI) concept — https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/
+- CNI Specification (ADD/DEL/CHECK, conflist format) — https://github.com/containernetworking/cni/blob/main/SPEC.md
+- Cluster networking model — https://kubernetes.io/docs/concepts/cluster-administration/networking/

@@ -14,3 +14,8 @@
 - `cilium-dbg status` shows Hubble enabled with metrics.
 - A Prometheus query for `cilium_feature_adv_connect_and_lb_bandwidth_manager_enabled` returns `1`.
 - `hubble observe` shows live L7 HTTP flow data, not just L3/L4.
+
+## Official documentation
+
+- Resource usage monitoring — https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/
+- Cilium/Hubble metrics — https://docs.cilium.io/en/stable/observability/metrics/
