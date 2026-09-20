@@ -14,6 +14,13 @@ Every link from your research table, mapped to the domain and scenario it's most
 
 → `domains/01-core-infra-cni/01-manual-cni-config`, `domains/01-core-infra-cni/02-multi-interface-pods`
 
+### Added after review feedback (see docs/exam-strategy.md)
+
+- Cilium CLI install reference — https://docs.cilium.io/en/stable/gettingstarted/k8s-install-default/
+- Cilium Helm reference — https://docs.cilium.io/en/stable/helm-reference/
+
+→ `domains/01-core-infra-cni/03-cilium-install-config`
+
 ## Domain 2 — Service Networking and DNS
 
 - Services concept — https://kubernetes.io/docs/concepts/services-networking/service/
@@ -60,6 +67,13 @@ Every link from your research table, mapped to the domain and scenario it's most
 
 → `domains/04-network-security-policy/04-istio-mtls-authz`, `.../05-cert-manager-gateway-tls`
 
+### Added after further review feedback (see docs/exam-strategy.md)
+
+- Cilium L7 policy examples — https://docs.cilium.io/en/stable/security/policy/language/#layer-7-examples
+- Cilium Network Policy overview — https://docs.cilium.io/en/stable/security/policy/
+
+→ `domains/04-network-security-policy/06-cilium-l7-policy`
+
 ## Domain 5 — Observability
 
 - Resource usage monitoring — https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/
@@ -73,3 +87,9 @@ Every link from your research table, mapped to the domain and scenario it's most
 - Istio's Jaeger addon (used in the tracing lab's setup.sh) — https://istio.io/latest/docs/ops/integrations/jaeger/
 
 → `domains/05-observability/03-distributed-tracing-jaeger`
+
+### Added after further review feedback (see docs/exam-strategy.md)
+
+- Envoy access log format reference — https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log/usage
+
+→ `domains/05-observability/04-gateway-access-logs`

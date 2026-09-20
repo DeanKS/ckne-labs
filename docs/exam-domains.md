@@ -10,7 +10,7 @@ Source: https://training.linuxfoundation.org/certification/certified-kubernetes-
 - Troubleshooting Pod Connectivity (DNS, pod-to-pod)
 - Configuring Multi-interface Pods
 
-Covered by: `domains/01-core-infra-cni/`
+Covered by: `domains/01-core-infra-cni/` — including a dedicated Cilium CLI install + Helm-value-mapping scenario (03), added after review found this under-tested relative to how heavily real beta feedback emphasizes it.
 
 ## 2. Service Networking and DNS — 25%
 
@@ -39,7 +39,7 @@ Covered by: `domains/03-advanced-traffic-mgmt/`
 - Managing TLS Certificates for Gateway API
 - Implementing Pod-level Authentication and Authorization
 
-Covered by: `domains/04-network-security-policy/` — including Istio `PeerAuthentication`/`AuthorizationPolicy` (scenario 04) and cert-manager-issued Gateway TLS (scenario 05), added after real beta-exam feedback flagged both as exam-relevant. See `docs/exam-strategy.md`.
+Covered by: `domains/04-network-security-policy/` — including Istio `PeerAuthentication`/`AuthorizationPolicy` (scenario 04), cert-manager-issued Gateway TLS (scenario 05), and L7 `CiliumNetworkPolicy` (scenario 06), added after real beta-exam feedback flagged all three as exam-relevant. See `docs/exam-strategy.md`.
 
 ## 5. Observability — 15%
 
@@ -47,13 +47,12 @@ Covered by: `domains/04-network-security-policy/` — including Istio `PeerAuthe
 - Troubleshooting End-to-End Network Performance with Tracing
 - Auditing Traffic with Logs
 
-Covered by: `domains/05-observability/` — including distributed tracing with Jaeger (scenario 03).
+Covered by: `domains/05-observability/` — including distributed tracing with Jaeger (scenario 03) and gateway access log reading (scenario 04).
 
 ## Gaps not yet covered in this repo (contributions welcome)
 
 - IPAM allocation troubleshooting beyond `host-local` (e.g. `whereabouts`, cluster-wide IP exhaustion scenarios)
 - Istio traffic management (`VirtualService`, `DestinationRule`) — current Istio coverage is security-only (PeerAuthentication/AuthorizationPolicy); real beta feedback emphasized security specifically, but traffic-shaping with Istio primitives isn't covered
-- Cilium L7 `CiliumNetworkPolicy` beyond the multi-tenant example already in scenario 03/04's ancestry — worth a dedicated scenario per beta feedback calling out L7 policy specifically
 - SPIFFE/SPIRE outside of a service mesh's own built-in identity (Istio/Cilium handle this internally in the current labs)
 
 See `docs/exam-strategy.md` for a fuller writeup of what a real beta exam sitter reported, and how it shaped what's in this repo versus what's still missing.

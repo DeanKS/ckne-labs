@@ -16,8 +16,9 @@ Standard round-robin load balancing across LLM inference replicas is a bad fit: 
 Given a cluster with KServe (v0.16+) and the Gateway API Inference Extension already installed:
 
 1. Deploy an `LLMInferenceService` for a model, backed by a router + `InferencePool` rather than a plain Kubernetes Service.
-2. Explain (and demonstrate you understand) why the router picks a specific pod for a given request instead of load-balancing evenly.
-3. Confirm the deployment exposes an OpenAI-compatible endpoint (`/v1/chat/completions`).
+2. **Before writing any YAML, check the currently-installed KServe/Gateway API Inference Extension CRD versions on the cluster** (`kubectl explain llminferenceservice.spec`, or the CRD's own docs) and use that as your source of truth over anything memorized — this domain's APIs move fast enough that a remembered field name from even a few months ago can be wrong. This is deliberately part of the task, not just good practice: real beta-exam feedback (`docs/exam-strategy.md`) specifically says this domain rewards fast documentation lookup over memorization.
+3. Explain (and demonstrate you understand) why the router picks a specific pod for a given request instead of load-balancing evenly.
+4. Confirm the deployment exposes an OpenAI-compatible endpoint (`/v1/chat/completions`).
 
 ## Success criteria
 
