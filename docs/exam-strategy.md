@@ -31,3 +31,13 @@ Knowing how a `Certificate` ends up as a Secret a `Gateway` listener references 
 - Textual answers can be typed directly into the browser-based exam interface in some tasks, rather than always requiring a file written to disk under `/opt` (the CKA/CKS convention) — don't assume every task needs a file artifact.
 - Validate and move on rather than perfecting one task — if something is taking too long, flag it mentally and come back later. Every `verify.sh` in this repo exists so you build that "solve, check, move on" habit against a script rather than eyeballing it.
 - There is currently no CKNE-specific exam simulator (unlike Killer Shell for CKA/CKS/CKAD) — this repo, imperfect as it is, is filling part of that gap deliberately.
+
+## How to actually use this repo, given "documentation over memorization"
+
+Since the real exam rewards fast documentation lookup over recall, practice that skill directly rather than just working toward being able to reproduce each `solution.md` from memory:
+
+1. **First attempt:** read `task.md` and the linked official docs only. Do not open `solution.md`. Time yourself.
+2. **Second attempt, later:** redo the same scenario from a clean cluster, from scratch, still without the solution — the point is confirming you can rebuild the reasoning, not that you memorized the first attempt's exact commands.
+3. **Only then** read `solution.md`, specifically for the "why" and the common-failure-modes section — by this point you've already found the "what" yourself.
+
+"Can I solve this from the task plus documentation, inside a time limit" is a better readiness signal than "can I reproduce the solution I already read."
