@@ -52,6 +52,18 @@
 
 ---
 
+## Bonus questions
+
+**AB1.** A manually created `EndpointSlice`, labeled `kubernetes.io/service-name: <service-name>` so it's associated with the Service. Kubernetes only auto-generates EndpointSlices when a Service has a `selector` for the EndpointSlice controller to reconcile against — remove the selector and nothing watches for backends on your behalf, by design, since a selector-less Service is meant for exactly this "I'm pointing at something outside normal pod discovery" case. See `domains/02-service-networking-dns/04-headless-service-manual-endpoints`.
+
+**AB2.** `PeerAuthentication` governs mTLS/identity (authentication); `AuthorizationPolicy` governs what an authenticated identity is allowed to do (authorization). A request with no valid mTLS at all fails at the connection level under `STRICT` mode — no HTTP response, the handshake itself is refused. A request that authenticates successfully but isn't permitted gets a clean HTTP 403 from the Envoy sidecar — proof it got past the identity layer and was still denied. The two look different specifically because one fails before HTTP even exists and the other fails with a proper HTTP status. See `domains/04-network-security-policy/04-istio-mtls-authz`.
+
+**AB3.** Check the `Certificate` object directly — `kubectl describe certificate` and its `Ready` condition/events — not the Gateway. The Gateway only reads whatever is currently sitting in the referenced Secret; it has no visibility into cert-manager's issuance or renewal process and will report healthy right up until the stale certificate actually expires and client TLS validation starts failing. See `domains/04-network-security-policy/05-cert-manager-gateway-tls`.
+
+**AB4.** A parent span's duration includes all of its children's durations, so the longest bar isn't necessarily where the actual work happened — if `backend`'s child span calling `db` accounts for most of that time, `db` is the real bottleneck and `backend` is mostly just waiting. Before concluding anything, check the split between the span's self-time and its children's time (or look for a large gap between when the parent starts and its first child begins, which can point to connection/handshake overhead rather than either service's own logic). See `domains/05-observability/03-distributed-tracing-jaeger`.
+
+---
+
 ## Rough scoring guide
 
 This isn't an official pass mark (CKNE's real cutoff hasn't been published as of this repo's writing), but as a self-check: if you can answer 16+/20 correctly and unaided, and can additionally *perform* the corresponding `domains/` lab live rather than just state the answer, you're in reasonable shape to attempt the real exam.

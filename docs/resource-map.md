@@ -52,9 +52,24 @@ Every link from your research table, mapped to the domain and scenario it's most
 
 → `domains/04-network-security-policy/01-network-policies`, `.../02-wireguard-encryption`, `.../03-gateway-tls`
 
+### Added after real beta-exam feedback (see docs/exam-strategy.md)
+
+- Istio PeerAuthentication — https://istio.io/latest/docs/reference/config/security/peer_authentication/
+- Istio AuthorizationPolicy — https://istio.io/latest/docs/reference/config/security/authorization-policy/
+- cert-manager Gateway API integration — https://cert-manager.io/docs/usage/gateway/
+
+→ `domains/04-network-security-policy/04-istio-mtls-authz`, `.../05-cert-manager-gateway-tls`
+
 ## Domain 5 — Observability
 
 - Resource usage monitoring — https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/
 - Cilium/Hubble metrics — https://docs.cilium.io/en/stable/observability/metrics/
 
 → `domains/05-observability/01-hubble-metrics`, `.../02-flow-logs-audit`
+
+### Added after real beta-exam feedback (see docs/exam-strategy.md)
+
+- Jaeger — https://www.jaegertracing.io/
+- Istio's Jaeger addon (used in the tracing lab's setup.sh) — https://istio.io/latest/docs/ops/integrations/jaeger/
+
+→ `domains/05-observability/03-distributed-tracing-jaeger`

@@ -63,3 +63,17 @@ Suggested time: 2 hours total, matching the real exam window.
 **Q19.** Security wants an hour's worth of evidence of exactly which flows were dropped by policy, with source/destination/port. Why is `hubble observe --follow` alone insufficient for this, even though it shows the right data live?
 
 **Q20.** An application's own logs show a connection timing out to a downstream Service. Name the observability layer that can tell you *whether* this is a NetworkPolicy denial versus a genuine backend outage, and why app-level logs alone can't distinguish the two.
+
+---
+
+## Bonus questions (not weighted into the 20 above)
+
+Added after real beta-exam feedback surfaced gaps in the original set — see `docs/exam-strategy.md`. These sit outside the weighted 15/25/20/25/15 count above so the existing answer numbering doesn't shift; treat them as supplementary practice for the four scenarios added afterward.
+
+**B1.** A Service is created with no `selector`. You confirm the Service and its ClusterIP exist, but nothing can reach it. What's missing, and why doesn't Kubernetes create it automatically the way it would for a normal Service?
+
+**B2.** A request into `payments` fails. You need to tell whether it was rejected because it wasn't encrypted at all, or because it was properly authenticated over mTLS but simply not permitted. Name the two Istio objects responsible for each layer, and how the two failure modes look different when you test them.
+
+**B3.** A Gateway's HTTPS listener references a Secret that a `Certificate` object is supposed to keep populated. The `Gateway` looks perfectly healthy. What's the one thing you should check to be sure the certificate isn't quietly failing to renew, and why won't the Gateway itself ever tell you that?
+
+**B4.** You're given a trace in Jaeger showing `frontend → backend → db`, and the `backend` span is the longest single bar in the waterfall. Why might fixing `backend` be the wrong move, and what would you check in the trace before concluding that?

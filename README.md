@@ -14,7 +14,7 @@ Hands-on lab repository for the [Certified Kubernetes Network Engineer (CKNE)](h
 | 4 | Network Security and Policy | 25% | [`domains/04-network-security-policy`](domains/04-network-security-policy) |
 | 5 | Observability | 15% | [`domains/05-observability`](domains/05-observability) |
 
-Full competency list per domain: [`docs/exam-domains.md`](docs/exam-domains.md).
+Full competency list per domain: [`docs/exam-domains.md`](docs/exam-domains.md). Real beta-exam feedback and how it shaped this repo: [`docs/exam-strategy.md`](docs/exam-strategy.md).
 
 ## Repository layout
 
@@ -25,6 +25,7 @@ ckne-labs/
 ├── reset-cluster.sh             # Tear down and clean up between attempts
 ├── docs/
 │   ├── exam-domains.md          # Full official curriculum + weight per competency
+│   ├── exam-strategy.md         # Notes from a real beta-exam sitter's write-up
 │   └── resource-map.md          # Every doc link you supplied, mapped to a domain/scenario
 ├── domains/
 │   ├── 01-core-infra-cni/
