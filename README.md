@@ -76,6 +76,8 @@ If `docker`/`kind`/etc. are installed but your shell says `command not found`, i
 
 Tooling used across labs: `kind`, `docker`, `kubectl`, `helm`, `cilium` CLI, `dig`/`nslookup`, `iptables`, `tcpdump`. Some Domain 3/5 labs (Cilium ClusterMesh, egress gateway, Hubble, LLM inference routing) assume Cilium as the CNI rather than the manual bridge config used in Domain 1 — each `setup.sh` says which CNI state it expects.
 
+**Note found through live testing:** Kind's node image only ships a minimal default set of CNI plugin binaries (`host-local`, `loopback`, `portmap`, `ptp`) — it does **not** include `bridge` or `tuning`, which Domain 1's manual-CNI scenarios need. Those scenarios' `setup.sh` now installs the missing binaries automatically (detecting node architecture and pulling the matching release from `containernetworking/plugins`), so this shouldn't surface as a blocker — but if you ever see a node stuck `NotReady` with a kubelet log saying `failed to find plugin "X" in path [/opt/cni/bin]`, this is almost always why, regardless of which scenario you're in.
+
 ## Getting started
 
 ```bash

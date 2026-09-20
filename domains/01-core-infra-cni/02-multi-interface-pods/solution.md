@@ -22,7 +22,7 @@ metadata:
   name: storage-net
 spec:
   config: '{
-    "cniVersion": "1.1.0",
+    "cniVersion": "1.0.0",
     "type": "bridge",
     "bridge": "br1",
     "ipam": {
@@ -56,3 +56,4 @@ spec:
 - Forgetting to `rollout status` the Multus daemonset before creating the pod — the CNI binary/config may not be dropped on every node yet.
 - `NetworkAttachmentDefinition` created in the wrong namespace — it must be in the same namespace as the pod referencing it (or referenced with `<namespace>/<name>` in the annotation).
 - Typo'ing the annotation key (`k8s.v1.cni.cncf.io/networks`, not `k8s.v1.cni.cncf.io/network`) — Multus silently ignores annotations it doesn't recognize, and the pod comes up with only `eth0`.
+- `cniVersion: 1.1.0` on the delegated config can trigger a runtime `STATUS`-command path some plugin builds don't fully implement — see the fuller writeup in `domains/01-core-infra-cni/01-manual-cni-config/solution.md`, which is where this was actually found on a live cluster. `1.0.0` here avoids it the same way.
