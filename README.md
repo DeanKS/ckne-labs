@@ -4,6 +4,8 @@ Hands-on lab repository for the [Certified Kubernetes Network Engineer (CKNE)](h
 
 > **CKNE is currently in beta** (as of writing: online, proctored, performance-based, 2 hours, $99 beta price, one free retake). Domain weights and task wording can still change before general availability — check the [official page](https://training.linuxfoundation.org/certification/certified-kubernetes-network-engineer-ckne/) before you sit the exam.
 
+> **This repo is also in beta.** Just like the exam it's built for, treat these labs as a work in progress rather than a finished, exhaustively-tested product. Concretely: not every `setup.sh`/`verify.sh` has been run end-to-end against a live cluster for every tool combination (Cilium version, Istio version, cert-manager version, etc.) — some are reasoned-through and syntax-checked rather than fully battle-tested. If something doesn't work as written, that's expected occasionally at this stage: check `docs/exam-domains.md` for known gaps, open an issue/PR with what you found (see `CONTRIBUTING.md`), and don't assume a stuck step is necessarily something you did wrong.
+
 ## Domain weighting (official)
 
 | # | Domain | Weight | Directory |
