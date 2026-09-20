@@ -39,7 +39,7 @@ Covered by: `domains/03-advanced-traffic-mgmt/`
 - Managing TLS Certificates for Gateway API
 - Implementing Pod-level Authentication and Authorization
 
-Covered by: `domains/04-network-security-policy/`
+Covered by: `domains/04-network-security-policy/` — including Istio `PeerAuthentication`/`AuthorizationPolicy` (scenario 04) and cert-manager-issued Gateway TLS (scenario 05), added after real beta-exam feedback flagged both as exam-relevant. See `docs/exam-strategy.md`.
 
 ## 5. Observability — 15%
 
@@ -47,11 +47,13 @@ Covered by: `domains/04-network-security-policy/`
 - Troubleshooting End-to-End Network Performance with Tracing
 - Auditing Traffic with Logs
 
-Covered by: `domains/05-observability/`
+Covered by: `domains/05-observability/` — including distributed tracing with Jaeger (scenario 03).
 
 ## Gaps not yet covered in this repo (contributions welcome)
 
 - IPAM allocation troubleshooting beyond `host-local` (e.g. `whereabouts`, cluster-wide IP exhaustion scenarios)
-- `tcpdump`-driven packet capture walkthroughs (currently only `iptables`/`ip` are exercised directly)
-- Pod-level mTLS/authn-authz beyond Cilium's mutual authentication (e.g. SPIFFE/SPIRE)
-- Distributed tracing for network performance (Domain 5 currently leans on metrics/logs more than traces)
+- Istio traffic management (`VirtualService`, `DestinationRule`) — current Istio coverage is security-only (PeerAuthentication/AuthorizationPolicy); real beta feedback emphasized security specifically, but traffic-shaping with Istio primitives isn't covered
+- Cilium L7 `CiliumNetworkPolicy` beyond the multi-tenant example already in scenario 03/04's ancestry — worth a dedicated scenario per beta feedback calling out L7 policy specifically
+- SPIFFE/SPIRE outside of a service mesh's own built-in identity (Istio/Cilium handle this internally in the current labs)
+
+See `docs/exam-strategy.md` for a fuller writeup of what a real beta exam sitter reported, and how it shaped what's in this repo versus what's still missing.
