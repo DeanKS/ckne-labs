@@ -21,7 +21,7 @@ On every node, configure a CNI 1.0.0 network named `dbnet` that:
 
 - `cni-test-pod` reaches `Running`.
 - Its IP is inside `10.1.0.0/16`.
-- `cni0` exists on every node.
+- `cni0` exists on whichever node ends up running `cni-test-pod` (the `bridge` plugin only creates it lazily, on first use — with a single test pod, don't expect to see it on all three nodes even with a correct conflist on every node).
 - `net.core.somaxconn` is set to `500` inside the pod's network namespace.
 
 ## Official documentation
