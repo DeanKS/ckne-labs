@@ -34,6 +34,10 @@ Every link from your research table, mapped to the domain and scenario it's most
 
 → `domains/02-service-networking-dns/01-l4-services-and-endpoints`, `.../02-coredns-customization`, `.../03-gateway-api-httproute`
 
+### Supplementary practice lab
+
+- Cilium Gateway API lab (cilium.io/labs) — same concepts as `03-gateway-api-httproute`, worked through Cilium's own Gateway API implementation specifically.
+
 ## Domain 3 — Advanced Traffic Management
 
 - Cilium egress gateway — https://docs.cilium.io/en/latest/network/egress-gateway/
@@ -45,6 +49,10 @@ Every link from your research table, mapped to the domain and scenario it's most
 - Envoy AI Gateway / LLM traffic filters — the `ai_protocol_manager_filter` and kgateway links you supplied did not resolve to a documented Envoy filter at time of writing. The real building blocks for the LLM-traffic competency are **KServe's `LLMInferenceService`** (v0.16+) and **`llm-d`**, which implement the **Gateway API Inference Extension**'s `InferencePool`. Use those instead of the two dead links: https://kserve.github.io/website/docs/model-serving/generative-inference/llmisvc/llmisvc-overview and https://gateway-api-inference-extension.sigs.k8s.io/
 
 → `domains/03-advanced-traffic-mgmt/01-egress-gateway`, `.../02-clustermesh-cross-cluster`, `.../03-llm-inference-routing`
+
+### Supplementary practice lab
+
+- Cilium ClusterMesh lab (cilium.io/labs) — direct match to `02-clustermesh-cross-cluster`, good for reinforcing the Global Service annotation flow.
 
 ## Domain 4 — Network Security and Policy
 
@@ -58,6 +66,11 @@ Every link from your research table, mapped to the domain and scenario it's most
 - Cilium mutual authentication (pod-to-pod mTLS) — https://docs.cilium.io/en/stable/network/servicemesh/mutual-authentication/mutual-authentication/
 
 → `domains/04-network-security-policy/01-network-policies`, `.../02-wireguard-encryption`, `.../03-gateway-tls`
+
+### Supplementary practice labs
+
+- Cilium Transparent Encryption with IPSec and WireGuard lab (cilium.io/labs) — direct match to `02-wireguard-encryption`, also covers IPSec, which that scenario doesn't.
+- Mutual Authentication in Cilium lab (cilium.io/labs) — Cilium's own SPIFFE-based mTLS, distinct from the Istio version in `04-istio-mtls-authz`. Worth doing for breadth, since the exam tests the authn/authz concept generically rather than one implementation.
 
 ### Added after real beta-exam feedback (see docs/exam-strategy.md)
 
