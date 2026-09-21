@@ -16,7 +16,7 @@ Hands-on lab repository for the [Certified Kubernetes Network Engineer (CKNE)](h
 | 4 | Network Security and Policy | 25% | [`domains/04-network-security-policy`](domains/04-network-security-policy) |
 | 5 | Observability | 15% | [`domains/05-observability`](domains/05-observability) |
 
-Full competency list per domain: [`docs/exam-domains.md`](docs/exam-domains.md). Real beta-exam feedback and how it shaped this repo: [`docs/exam-strategy.md`](docs/exam-strategy.md).
+Full competency list per domain: [`docs/exam-domains.md`](docs/exam-domains.md). Real beta-exam feedback and how it shaped this repo: [`docs/exam-strategy.md`](docs/exam-strategy.md). Unvetted third-party courses/labs worth a look but not built into this repo: [`docs/further-study.md`](docs/further-study.md).
 
 ## Repository layout
 
@@ -28,7 +28,8 @@ ckne-labs/
 ├── docs/
 │   ├── exam-domains.md          # Full official curriculum + weight per competency
 │   ├── exam-strategy.md         # Notes from a real beta-exam sitter's write-up
-│   └── resource-map.md          # Every doc link you supplied, mapped to a domain/scenario
+│   ├── further-study.md         # Unvetted third-party courses/labs, kept separate from the resource map
+│   └── resource-map.md          # Official docs + Cilium's own labs, mapped to a domain/scenario
 ├── domains/
 │   ├── 01-core-infra-cni/
 │   ├── 02-service-networking-dns/
