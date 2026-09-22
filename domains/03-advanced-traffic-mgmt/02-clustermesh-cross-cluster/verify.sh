@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -uo pipefail
-echo "This scenario spans two clusters — verify manually against both contexts:"
+echo "This scenario spans two clusters - verify manually against both contexts:"
 echo
 echo "  cilium clustermesh status --context cluster1"
 echo "  cilium clustermesh status --context cluster2"

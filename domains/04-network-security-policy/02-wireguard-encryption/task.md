@@ -5,7 +5,7 @@
 
 ## Task
 
-Enable transparent node-to-node encryption for all pod traffic crossing node boundaries, using Cilium's WireGuard datapath — without requiring any application-level TLS changes.
+Enable transparent node-to-node encryption for all pod traffic crossing node boundaries, using Cilium's WireGuard datapath - without requiring any application-level TLS changes.
 
 ## Success criteria
 
@@ -15,4 +15,4 @@ Enable transparent node-to-node encryption for all pod traffic crossing node bou
 
 ## Official documentation
 
-- Cilium WireGuard node-to-node encryption — https://docs.cilium.io/en/stable/security/network/encryption-wireguard/
+- Cilium WireGuard node-to-node encryption - https://docs.cilium.io/en/stable/security/network/encryption-wireguard/

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 echo "Installing Istio (demo profile, includes sidecar injection) and the Jaeger addon so this"
-echo "scenario is actually reproducible rather than assuming a pre-existing mesh — this was a"
+echo "scenario is actually reproducible rather than assuming a pre-existing mesh - this was a"
 echo "gap flagged in review: don't lose prep time wondering why Jaeger isn't there."
 echo
 

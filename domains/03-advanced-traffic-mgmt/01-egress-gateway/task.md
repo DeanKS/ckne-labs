@@ -19,4 +19,4 @@ Configure a `CiliumEgressGatewayPolicy` so that all traffic from pods in `ai-wor
 
 ## Official documentation
 
-- Cilium Egress Gateway — https://docs.cilium.io/en/latest/network/egress-gateway/
+- Cilium Egress Gateway - https://docs.cilium.io/en/latest/network/egress-gateway/

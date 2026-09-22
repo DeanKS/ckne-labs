@@ -12,5 +12,5 @@ check "AuthorizationPolicy references frontend-sa principal" \
 
 echo "---"; echo "${pass} passed, ${fail} failed"
 echo "Note: full mTLS/authz behavior verification requires a running Istio mesh with sidecars"
-echo "injected — this check only confirms the policy objects exist and are shaped correctly."
+echo "injected - this check only confirms the policy objects exist and are shaped correctly."
 exit $fail

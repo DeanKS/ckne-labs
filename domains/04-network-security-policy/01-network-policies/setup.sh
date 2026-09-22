@@ -8,4 +8,4 @@ for app in frontend backend db; do
   kubectl -n secure-app patch deployment "$app" --type merge -p \
     "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"app\":\"$app\"}}}}}"
 done
-echo "secure-app namespace deployed with no NetworkPolicies yet — everything can reach everything."
+echo "secure-app namespace deployed with no NetworkPolicies yet - everything can reach everything."

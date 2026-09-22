@@ -2,7 +2,7 @@
 
 ## Why this needs Cilium, not plain NetworkPolicy
 
-Standard Kubernetes `NetworkPolicy` operates purely on IP/port — it has no concept of "this is an HTTP GET vs POST," because that information lives inside the packet payload, above the layer plain NetworkPolicy inspects. `CiliumNetworkPolicy`'s `rules.http` block works because Cilium's eBPF datapath, when L7 rules are present, transparently proxies matching traffic through an in-cluster Envoy instance that actually parses HTTP and enforces method/path rules — this is also why L7 policy has a real (if usually small) latency cost that pure L3/L4 policy doesn't, worth knowing as a "why would I not just always use L7 everywhere" answer if asked.
+Standard Kubernetes `NetworkPolicy` operates purely on IP/port - it has no concept of "this is an HTTP GET vs POST," because that information lives inside the packet payload, above the layer plain NetworkPolicy inspects. `CiliumNetworkPolicy`'s `rules.http` block works because Cilium's eBPF datapath, when L7 rules are present, transparently proxies matching traffic through an in-cluster Envoy instance that actually parses HTTP and enforces method/path rules - this is also why L7 policy has a real (if usually small) latency cost that pure L3/L4 policy doesn't, worth knowing as a "why would I not just always use L7 everywhere" answer if asked.
 
 ## Policy
 
@@ -30,7 +30,7 @@ spec:
           path: "/api/.*"
 ```
 
-Only listing the `GET` rule is deliberate, not an oversight: once any `http` rules block exists for a given `toPorts` entry, Cilium's L7 enforcement is implicitly default-deny for anything not matching a listed rule on that port — you do not need (and should not add) explicit `DELETE`/`POST` deny rules; their absence from the allow-list is the denial. This mirrors exactly how Istio's `AuthorizationPolicy` behaves once a workload is selected by any `ALLOW` rule (see `domains/04-network-security-policy/04-istio-mtls-authz`) — the same "presence of any positive rule flips the default" pattern shows up in both tools.
+Only listing the `GET` rule is deliberate, not an oversight: once any `http` rules block exists for a given `toPorts` entry, Cilium's L7 enforcement is implicitly default-deny for anything not matching a listed rule on that port - you do not need (and should not add) explicit `DELETE`/`POST` deny rules; their absence from the allow-list is the denial. This mirrors exactly how Istio's `AuthorizationPolicy` behaves once a workload is selected by any `ALLOW` rule (see `domains/04-network-security-policy/04-istio-mtls-authz`) - the same "presence of any positive rule flips the default" pattern shows up in both tools.
 
 ## Verify
 
@@ -50,10 +50,10 @@ Confirm it's genuinely L7-aware, not a coincidental L4 block:
 kubectl -n kube-system exec ds/cilium -- hubble observe --verdict DROPPED -f
 ```
 
-The dropped flow should show `http-request` context including the method (`POST`) and path — a plain L4 policy could never produce this level of detail in a flow record, because it never looks past the TCP header.
+The dropped flow should show `http-request` context including the method (`POST`) and path - a plain L4 policy could never produce this level of detail in a flow record, because it never looks past the TCP header.
 
 ## Common failure modes
 
-- Forgetting the `path` regex needs to match the *full* path Cilium sees, including query strings or trailing content depending on how strict you write it — a too-narrow regex (e.g. `"/api/users"` with no wildcard) silently blocks legitimate `GET /api/users?id=5` requests, which looks identical to a misconfigured method rule if you're not checking Hubble output carefully.
-- Applying the L7 rule but expecting it to also restrict `frontend`'s traffic to services *other* than `api` — the `endpointSelector` scopes this policy strictly to ingress on `api`; other services `frontend` talks to are entirely unaffected, by design, per the task's third success criterion.
-- Testing with `curl -X POST` and seeing a timeout instead of a 403 — if that happens, no L7 proxy redirection actually occurred (check that Cilium's L7 features/proxy are enabled cluster-wide, and that the `CiliumNetworkPolicy` was actually accepted — `kubectl -n l7-lab get ciliumnetworkpolicy api-l7-get-only -o yaml` should show no error events).
+- Forgetting the `path` regex needs to match the *full* path Cilium sees, including query strings or trailing content depending on how strict you write it - a too-narrow regex (e.g. `"/api/users"` with no wildcard) silently blocks legitimate `GET /api/users?id=5` requests, which looks identical to a misconfigured method rule if you're not checking Hubble output carefully.
+- Applying the L7 rule but expecting it to also restrict `frontend`'s traffic to services *other* than `api` - the `endpointSelector` scopes this policy strictly to ingress on `api`; other services `frontend` talks to are entirely unaffected, by design, per the task's third success criterion.
+- Testing with `curl -X POST` and seeing a timeout instead of a 403 - if that happens, no L7 proxy redirection actually occurred (check that Cilium's L7 features/proxy are enabled cluster-wide, and that the `CiliumNetworkPolicy` was actually accepted - `kubectl -n l7-lab get ciliumnetworkpolicy api-l7-get-only -o yaml` should show no error events).

@@ -18,8 +18,8 @@ EOF
 
 seed_metric frontend 45
 seed_metric orders 52
-seed_metric payments 890   # deliberately abnormal — this is what Part 2 asks you to find
+seed_metric payments 890   # deliberately abnormal - this is what Part 2 asks you to find
 seed_metric database 38
 
 echo "Synthetic latency data seeded for frontend/orders/payments/database."
-echo "One of these four is deliberately abnormal — find it via the dashboard, not this script."
+echo "One of these four is deliberately abnormal - find it via the dashboard, not this script."

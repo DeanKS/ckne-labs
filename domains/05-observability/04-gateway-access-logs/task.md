@@ -17,15 +17,15 @@ From the log alone, without re-running any traffic yourself first:
 
 1. Identify every request that failed **at the gateway** (4xx/5xx from the gateway or its immediate upstream) versus requests that succeeded.
 2. Identify anything that looks like reconnaissance/probing rather than a normal client mistake (e.g. a burst of requests to paths that don't exist, from one source, in a short window).
-3. For the single slowest logged request, extract its latency and say whether that number alone tells you where the time was spent (compare with `domains/05-observability/03-distributed-tracing-jaeger` — it doesn't, on its own).
+3. For the single slowest logged request, extract its latency and say whether that number alone tells you where the time was spent (compare with `domains/05-observability/03-distributed-tracing-jaeger` - it doesn't, on its own).
 
 ## Success criteria
 
 - You can list every non-2xx status code in the log with its path and source.
 - You can name which entries constitute a probing pattern versus an isolated client error.
-- You can state the request ID (if present) of the highest-latency entry, and correctly explain why the access log's single latency number can't tell you *which hop* inside that request was slow — only a trace can.
+- You can state the request ID (if present) of the highest-latency entry, and correctly explain why the access log's single latency number can't tell you *which hop* inside that request was slow - only a trace can.
 
 ## Official documentation
 
-- Envoy access log format reference — https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log/usage
-- Gateway API concept (for what sits in front of these logs) — https://kubernetes.io/docs/concepts/services-networking/gateway/
+- Envoy access log format reference - https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log/usage
+- Gateway API concept (for what sits in front of these logs) - https://kubernetes.io/docs/concepts/services-networking/gateway/

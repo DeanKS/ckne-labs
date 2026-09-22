@@ -2,7 +2,7 @@
 
 ## Why order matters in HTTPRoute rules
 
-Gateway API evaluates `HTTPRoute` rules in the order they're written, first match wins — there's no automatic "most specific match" resolution the way some Ingress controllers do it by path length. So the canary (header-matched) rule has to come **before** the catch-all path rule, or the catch-all would swallow everything first.
+Gateway API evaluates `HTTPRoute` rules in the order they're written, first match wins - there's no automatic "most specific match" resolution the way some Ingress controllers do it by path length. So the canary (header-matched) rule has to come **before** the catch-all path rule, or the catch-all would swallow everything first.
 
 ## Manifests
 
@@ -63,5 +63,5 @@ kubectl -n gw-lab get httproute orders-route -o yaml | grep -A2 "type: ResolvedR
 ## Common failure modes
 
 - Putting the catch-all rule first: it matches `/orders` regardless of headers, so the canary rule never fires.
-- Forgetting `allowedRoutes.namespaces.from` on the `Gateway` listener — defaults to `Same`, but if the `HTTPRoute` lives in a different namespace than the `Gateway`, it needs `from: All` or a `Selector`, and the route's `ResolvedRefs` condition will flip to `False` with a clear reason if this is wrong.
-- Referencing a `backendRef` Service that doesn't exist or has no matching port — this is exactly what `ResolvedRefs: False` is for; check `kubectl describe httproute` for the reason string instead of guessing.
+- Forgetting `allowedRoutes.namespaces.from` on the `Gateway` listener - defaults to `Same`, but if the `HTTPRoute` lives in a different namespace than the `Gateway`, it needs `from: All` or a `Selector`, and the route's `ResolvedRefs` condition will flip to `False` with a clear reason if this is wrong.
+- Referencing a `backendRef` Service that doesn't exist or has no matching port - this is exactly what `ResolvedRefs: False` is for; check `kubectl describe httproute` for the reason string instead of guessing.

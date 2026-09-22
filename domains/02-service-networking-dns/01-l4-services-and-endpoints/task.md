@@ -5,11 +5,11 @@
 
 ## Context
 
-A `Deployment` named `web` (3 replicas, port 8080) exists in namespace `svc-lab`. A `ClusterIP` Service `web-svc` targets it on port `80`. Users report intermittent `Connection refused` — roughly 1 in 3 requests fails.
+A `Deployment` named `web` (3 replicas, port 8080) exists in namespace `svc-lab`. A `ClusterIP` Service `web-svc` targets it on port `80`. Users report intermittent `Connection refused` - roughly 1 in 3 requests fails.
 
 ## Task
 
-1. Diagnose why the Service intermittently fails, using `EndpointSlices` — not just `kubectl get endpoints`.
+1. Diagnose why the Service intermittently fails, using `EndpointSlices` - not just `kubectl get endpoints`.
 2. Fix it so all traffic sent to `web-svc:80` reaches a genuinely ready backend.
 3. Without changing replica count, ensure a pod that fails its readiness probe is removed from the Service's routable set within 5 seconds of failing.
 
@@ -21,6 +21,6 @@ A `Deployment` named `web` (3 replicas, port 8080) exists in namespace `svc-lab`
 
 ## Official documentation
 
-- Service concept — https://kubernetes.io/docs/concepts/services-networking/service/
-- Virtual IPs and Service proxies (kube-proxy modes) — https://kubernetes.io/docs/reference/networking/virtual-ips/
-- EndpointSlices — https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/
+- Service concept - https://kubernetes.io/docs/concepts/services-networking/service/
+- Virtual IPs and Service proxies (kube-proxy modes) - https://kubernetes.io/docs/reference/networking/virtual-ips/
+- EndpointSlices - https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/

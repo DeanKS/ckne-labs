@@ -3,7 +3,7 @@ set -uo pipefail
 pass=0; fail=0
 check() { if eval "$2"; then echo "PASS: $1"; pass=$((pass+1)); else echo "FAIL: $1"; fail=$((fail+1)); fi; }
 
-# cni0 is only created on whichever node actually schedules the pod — check that node
+# cni0 is only created on whichever node actually schedules the pod - check that node
 # specifically rather than assuming it's always ckne-labs-worker.
 POD_NODE=$(kubectl get pod cni-test-pod -o jsonpath='{.spec.nodeName}' 2>/dev/null || echo "")
 check "cni0 exists on the node running cni-test-pod (${POD_NODE:-unknown})" \

@@ -13,4 +13,4 @@ for app in frontend payments other-svc; do
 done
 
 echo "mesh-lab ready: frontend, payments, and other-svc, each on their own ServiceAccount."
-echo "No PeerAuthentication or AuthorizationPolicy applied yet — mTLS is currently PERMISSIVE (default)."
+echo "No PeerAuthentication or AuthorizationPolicy applied yet - mTLS is currently PERMISSIVE (default)."

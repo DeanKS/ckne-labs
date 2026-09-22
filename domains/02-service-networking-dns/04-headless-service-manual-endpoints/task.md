@@ -5,7 +5,7 @@
 
 ## Context
 
-The platform team needs a stable in-cluster DNS name and ClusterIP, `external-api.svc-lab.svc.cluster.local`, for a legacy system that lives **outside** the cluster at `192.0.2.10:443`. There is no pod backing this — it must point at a fixed external address.
+The platform team needs a stable in-cluster DNS name and ClusterIP, `external-api.svc-lab.svc.cluster.local`, for a legacy system that lives **outside** the cluster at `192.0.2.10:443`. There is no pod backing this - it must point at a fixed external address.
 
 ## Task
 
@@ -18,9 +18,9 @@ The platform team needs a stable in-cluster DNS name and ClusterIP, `external-ap
 - `kubectl get svc external-api` shows no selector and a valid ClusterIP.
 - `kubectl get endpointslices -l kubernetes.io/service-name=external-api` returns your manually created slice.
 - `dig external-api.svc-lab.svc.cluster.local` from inside a pod resolves to the Service's ClusterIP.
-- A `curl` to `https://external-api.svc-lab.svc.cluster.local` from inside the cluster reaches `192.0.2.10:443` (simulated locally — see `setup.sh`).
+- A `curl` to `https://external-api.svc-lab.svc.cluster.local` from inside the cluster reaches `192.0.2.10:443` (simulated locally - see `setup.sh`).
 
 ## Official documentation
 
-- Services without selectors — https://kubernetes.io/docs/concepts/services-networking/service/#services-without-selectors
-- EndpointSlices — https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/
+- Services without selectors - https://kubernetes.io/docs/concepts/services-networking/service/#services-without-selectors
+- EndpointSlices - https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/

@@ -5,7 +5,7 @@
 
 ## Context
 
-The cluster is already running with a primary CNI installed (default pod network). A workload team needs one pod to also join a separate, isolated "storage" network on `192.168.100.0/24` in addition to its normal pod network — without touching the primary CNI config.
+The cluster is already running with a primary CNI installed (default pod network). A workload team needs one pod to also join a separate, isolated "storage" network on `192.168.100.0/24` in addition to its normal pod network - without touching the primary CNI config.
 
 ## Task
 
@@ -17,10 +17,10 @@ The cluster is already running with a primary CNI installed (default pod network
 
 - `kubectl exec <pod> -- ip addr` shows both `eth0` and `net1`.
 - `net1` has an address in `192.168.100.0/24`.
-- The primary network (`eth0`) is unaffected — a plain pod without the annotation still only gets one interface.
+- The primary network (`eth0`) is unaffected - a plain pod without the annotation still only gets one interface.
 
 ## Official documentation
 
-- Multus quickstart — https://github.com/k8snetworkplumbingwg/multus-cni/blob/master/docs/quickstart.md
-- Multus configuration reference — https://github.com/k8snetworkplumbingwg/multus-cni/blob/master/docs/configuration.md
-- CNI Specification — https://github.com/containernetworking/cni/blob/main/SPEC.md
+- Multus quickstart - https://github.com/k8snetworkplumbingwg/multus-cni/blob/master/docs/quickstart.md
+- Multus configuration reference - https://github.com/k8snetworkplumbingwg/multus-cni/blob/master/docs/configuration.md
+- CNI Specification - https://github.com/containernetworking/cni/blob/main/SPEC.md
