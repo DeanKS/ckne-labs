@@ -3,14 +3,14 @@
 ## The architecture, in order
 
 1. **`LLMInferenceService`** (KServe CRD, GA-ish since KServe v0.16) is the top-level object you create. Unlike the older `InferenceService` (built for classic ML predictors), it's purpose-built for generative workloads: streaming responses, multi-turn context, OpenAI-compatible endpoints.
-2. Under the hood, KServe provisions an **`InferencePool`** — a group of backend replicas (typically vLLM pods) that is explicitly *not* just a Service with round-robin/random balancing. It's the Gateway API Inference Extension's abstraction for "a pool of interchangeable-but-not-identical-state inference workers."
-3. In front of the pool sits a **router + scheduler** (in `llm-d`, the "Endpoint Picker"/EPP). The scheduler picks a backend per-request using signals like KV-cache locality (has this replica already processed a prefix of this conversation?) and current load — not round-robin.
+2. Under the hood, KServe provisions an **`InferencePool`** - a group of backend replicas (typically vLLM pods) that is explicitly *not* just a Service with round-robin/random balancing. It's the Gateway API Inference Extension's abstraction for "a pool of interchangeable-but-not-identical-state inference workers."
+3. In front of the pool sits a **router + scheduler** (in `llm-d`, the "Endpoint Picker"/EPP). The scheduler picks a backend per-request using signals like KV-cache locality (has this replica already processed a prefix of this conversation?) and current load - not round-robin.
 4. A **Gateway** (Gateway API `Gateway`/`HTTPRoute`, often fronted by Envoy AI Gateway for OpenAI-compatible edge features like token-based rate limiting) exposes the whole thing externally.
 
 ## Minimal LLMInferenceService shape
 
 ```yaml
-apiVersion: serving.kserve.io/v1alpha1   # verify against your installed KServe version — this API is still moving
+apiVersion: serving.kserve.io/v1alpha1   # verify against your installed KServe version - this API is still moving
 kind: LLMInferenceService
 metadata:
   name: llm-vllm
@@ -22,11 +22,11 @@ spec:
     scheduler: {}  # empty scheduler = KServe provisions the llm-d Endpoint Picker
 ```
 
-Do not memorize the exact field names here for the exam — the important thing to be able to say out loud is: *this CRD creates a router, a scheduler, and an InferencePool, and none of those exist for a plain `InferenceService`.*
+Do not memorize the exact field names here for the exam - the important thing to be able to say out loud is: *this CRD creates a router, a scheduler, and an InferencePool, and none of those exist for a plain `InferenceService`.*
 
 ## Why KV-cache locality beats round-robin
 
-When a client sends turn 2 of a conversation, the prompt is turn 1 + turn 2 concatenated. If turn 2 lands on the same replica that processed turn 1, that replica's KV-cache already holds the attention state for the shared prefix and only needs to compute the new tokens — a fraction of the work. If round-robin sends it to a different replica, that replica has to recompute the entire prefix from scratch. This is purely a routing decision, not a model change, which is why it's tested as a *networking* competency rather than an ML one.
+When a client sends turn 2 of a conversation, the prompt is turn 1 + turn 2 concatenated. If turn 2 lands on the same replica that processed turn 1, that replica's KV-cache already holds the attention state for the shared prefix and only needs to compute the new tokens - a fraction of the work. If round-robin sends it to a different replica, that replica has to recompute the entire prefix from scratch. This is purely a routing decision, not a model change, which is why it's tested as a *networking* competency rather than an ML one.
 
 ## Confirming it's working (conceptually)
 

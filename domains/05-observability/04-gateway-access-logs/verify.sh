@@ -12,6 +12,6 @@ check "req_id a1c0 is the slowest logged entry (latency_ms=3004)" \
   "grep 'req_id=a1c0' sample-access.log | grep -q 'latency_ms=3004'"
 
 echo "---"; echo "${pass} passed, ${fail} failed"
-echo "Note: this scenario is primarily a reading/analysis exercise — the checks above only"
+echo "Note: this scenario is primarily a reading/analysis exercise - the checks above only"
 echo "confirm the sample log is intact, not that you correctly interpreted it."
 exit $fail

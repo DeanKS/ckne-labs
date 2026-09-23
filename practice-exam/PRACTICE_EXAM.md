@@ -1,12 +1,12 @@
 # CKNE Practice Exam (20 scenario questions)
 
-Format matches the real CKNE: performance-based scenario prompts against a live cluster, not multiple choice. Question count per domain is weighted to the official percentages (15/25/20/25/15 → 3/5/4/5/3 out of 20). Answers and grading notes are in `ANSWERS.md` — attempt each one on a real cluster before checking.
+Format matches the real CKNE: performance-based scenario prompts against a live cluster, not multiple choice. Question count per domain is weighted to the official percentages (15/25/20/25/15 → 3/5/4/5/3 out of 20). Answers and grading notes are in `ANSWERS.md` - attempt each one on a real cluster before checking.
 
 Suggested time: 2 hours total, matching the real exam window.
 
 ---
 
-## Domain 1 — Core Infrastructure and CNI (3 questions)
+## Domain 1 - Core Infrastructure and CNI (3 questions)
 
 **Q1.** A pod is stuck in `ContainerCreating` with event `failed to find plugin "bridge" in path [/opt/cni/bin]`. Fix it without reinstalling the entire CNI, and explain what the error tells you about where the failure actually is (binary vs. config vs. kubelet).
 
@@ -16,11 +16,11 @@ Suggested time: 2 hours total, matching the real exam window.
 
 ---
 
-## Domain 2 — Service Networking and DNS (5 questions)
+## Domain 2 - Service Networking and DNS (5 questions)
 
 **Q4.** A `ClusterIP` Service has 3 backend pods; `kubectl get endpoints` lists all 3, but roughly a third of requests fail. What object would you check that `Endpoints` can't tell you, and why?
 
-**Q5.** You need `internal.corp.example` to resolve via an internal resolver at `10.0.0.53`, while everything else — including all cluster Services — keeps working exactly as today. Where do you make this change, and what's the risk of getting the block structure wrong?
+**Q5.** You need `internal.corp.example` to resolve via an internal resolver at `10.0.0.53`, while everything else - including all cluster Services - keeps working exactly as today. Where do you make this change, and what's the risk of getting the block structure wrong?
 
 **Q6.** Explain, in one or two sentences, the practical difference between kube-proxy's `iptables` mode and `ipvs` mode that would make you choose one over the other at scale.
 
@@ -30,7 +30,7 @@ Suggested time: 2 hours total, matching the real exam window.
 
 ---
 
-## Domain 3 — Advanced Traffic Management (4 questions)
+## Domain 3 - Advanced Traffic Management (4 questions)
 
 **Q9.** You need all egress from one namespace to one external CIDR to consistently originate from a single, fixed IP, regardless of which node the source pod lands on. Name the Cilium feature and the two things it is documented as being incompatible with.
 
@@ -42,7 +42,7 @@ Suggested time: 2 hours total, matching the real exam window.
 
 ---
 
-## Domain 4 — Network Security and Policy (5 questions)
+## Domain 4 - Network Security and Policy (5 questions)
 
 **Q13.** After applying a default-deny `NetworkPolicy` (both directions) plus an ingress-only allow rule from `app-a` to `app-b`, `app-a` still can't reach `app-b`. What's missing, and why doesn't an ingress allow rule alone fix it?
 
@@ -50,13 +50,13 @@ Suggested time: 2 hours total, matching the real exam window.
 
 **Q15.** Same-node pod-to-pod traffic shows up unencrypted even after WireGuard node encryption is confirmed enabled and working. Is this a bug? Explain.
 
-**Q16.** You need the Gateway to validate an upstream backend's TLS certificate against a private CA before forwarding traffic to it. Which Gateway API object handles this, and what does it attach to — the Gateway, the HTTPRoute, or the Service?
+**Q16.** You need the Gateway to validate an upstream backend's TLS certificate against a private CA before forwarding traffic to it. Which Gateway API object handles this, and what does it attach to - the Gateway, the HTTPRoute, or the Service?
 
 **Q17.** A ServiceAccount only needs to read ConfigMaps in its own namespace. What's wrong with granting this via a `ClusterRole` + `ClusterRoleBinding` even if the verbs listed are otherwise correct?
 
 ---
 
-## Domain 5 — Observability (3 questions)
+## Domain 5 - Observability (3 questions)
 
 **Q18.** You've set `bandwidthManager.enabled=true` in the Cilium Helm values and the upgrade succeeded with no errors. What single further check confirms the feature is actually active in the eBPF datapath rather than just configured?
 
@@ -68,7 +68,7 @@ Suggested time: 2 hours total, matching the real exam window.
 
 ## Bonus questions (not weighted into the 20 above)
 
-Added after real beta-exam feedback surfaced gaps in the original set — see `docs/exam-strategy.md`. These sit outside the weighted 15/25/20/25/15 count above so the existing answer numbering doesn't shift; treat them as supplementary practice for the four scenarios added afterward.
+Added after real beta-exam feedback surfaced gaps in the original set - see `docs/exam-strategy.md`. These sit outside the weighted 15/25/20/25/15 count above so the existing answer numbering doesn't shift; treat them as supplementary practice for the four scenarios added afterward.
 
 **B1.** A Service is created with no `selector`. You confirm the Service and its ClusterIP exist, but nothing can reach it. What's missing, and why doesn't Kubernetes create it automatically the way it would for a normal Service?
 

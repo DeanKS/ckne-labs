@@ -5,7 +5,7 @@
 
 ## Why this scenario exists
 
-Real-world CKNE beta feedback (`docs/exam-strategy.md`) singles this out specifically: "focus on Cilium installation with the Cilium CLI and how CLI options map to Helm values." Scenario 01 in this domain deliberately teaches raw CNI mechanics with nothing installed — a different, foundational skill. This scenario is the Cilium-specific one the beta report says actually gets tested.
+Real-world CKNE beta feedback (`docs/exam-strategy.md`) singles this out specifically: "focus on Cilium installation with the Cilium CLI and how CLI options map to Helm values." Scenario 01 in this domain deliberately teaches raw CNI mechanics with nothing installed - a different, foundational skill. This scenario is the Cilium-specific one the beta report says actually gets tested.
 
 ## Context
 
@@ -22,7 +22,7 @@ Nodes are stuck `NotReady` and Hubble tooling in later scenarios of this repo wo
 ## Task
 
 1. Install Cilium using the **Cilium CLI**, with `kubeProxyReplacement` enabled and Hubble (plus its UI) enabled.
-2. Without re-running `cilium install` from scratch, identify the exact Helm values your CLI flags correspond to — the CLI is a thin wrapper around a Helm chart, and being able to translate between the two is the actual skill being tested here, not just running one command.
+2. Without re-running `cilium install` from scratch, identify the exact Helm values your CLI flags correspond to - the CLI is a thin wrapper around a Helm chart, and being able to translate between the two is the actual skill being tested here, not just running one command.
 3. Confirm the cluster is fully healthy: nodes `Ready`, `kube-proxy` no longer doing the work it used to (or absent entirely, if this is a fresh cluster), Hubble relay and UI both up.
 
 ## Success criteria
@@ -34,5 +34,5 @@ Nodes are stuck `NotReady` and Hubble tooling in later scenarios of this repo wo
 
 ## Official documentation
 
-- Cilium CLI install reference — https://docs.cilium.io/en/stable/gettingstarted/k8s-install-default/
-- Cilium Helm reference — https://docs.cilium.io/en/stable/helm-reference/
+- Cilium CLI install reference - https://docs.cilium.io/en/stable/gettingstarted/k8s-install-default/
+- Cilium Helm reference - https://docs.cilium.io/en/stable/helm-reference/

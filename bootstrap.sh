@@ -8,4 +8,4 @@ kubectl cluster-info --context "kind-${CLUSTER_NAME}"
 
 echo
 echo "Cluster '${CLUSTER_NAME}' provisioned. Nodes will show NotReady until a CNI"
-echo "is installed — that's expected. Start with domains/01-core-infra-cni/."
+echo "is installed - that's expected. Start with domains/01-core-infra-cni/."

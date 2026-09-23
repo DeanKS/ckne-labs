@@ -15,4 +15,4 @@ cat > sample-access.log << 'LOG'
 2026-09-20T10:00:22Z req_id=a1c2 src=203.0.113.8 method=GET path=/api/orders status=200 upstream=orders-v2 latency_ms=310
 LOG
 
-echo "sample-access.log generated. Analyze it per task.md — do not regenerate traffic first."
+echo "sample-access.log generated. Analyze it per task.md - do not regenerate traffic first."

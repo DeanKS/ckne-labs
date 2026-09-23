@@ -17,10 +17,10 @@ Two clusters, `cluster1` and `cluster2`, both run Cilium as CNI and both have a 
 
 - `cilium clustermesh status` on both clusters shows the other as connected/ready.
 - `catalog-svc` in `cluster1` has endpoints listed from both clusters (check via `cilium service list` or Hubble, not just `kubectl get endpoints`, which is cluster-local by definition).
-- Killing all `catalog-svc` backend pods in `cluster1` doesn't cause client-side errors — traffic shifts entirely to `cluster2` backends.
+- Killing all `catalog-svc` backend pods in `cluster1` doesn't cause client-side errors - traffic shifts entirely to `cluster2` backends.
 
 ## Official documentation
 
-- Cilium ClusterMesh introduction — https://docs.cilium.io/en/latest/network/clustermesh/intro/
-- ClusterMesh setup — https://docs.cilium.io/en/stable/network/clustermesh/setup/
-- ClusterMesh load-balancing (Global Services) — https://docs.cilium.io/en/latest/network/clustermesh/load-balancing/
+- Cilium ClusterMesh introduction - https://docs.cilium.io/en/latest/network/clustermesh/intro/
+- ClusterMesh setup - https://docs.cilium.io/en/stable/network/clustermesh/setup/
+- ClusterMesh load-balancing (Global Services) - https://docs.cilium.io/en/latest/network/clustermesh/load-balancing/

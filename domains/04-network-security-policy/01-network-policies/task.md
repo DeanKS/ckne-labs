@@ -24,4 +24,4 @@ Namespace `secure-app` has `frontend`, `backend`, and `db` deployments. Today an
 
 ## Official documentation
 
-- NetworkPolicy concept — https://kubernetes.io/docs/concepts/services-networking/network-policies/
+- NetworkPolicy concept - https://kubernetes.io/docs/concepts/services-networking/network-policies/

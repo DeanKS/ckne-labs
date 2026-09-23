@@ -21,5 +21,5 @@ Configure CoreDNS so that:
 
 ## Official documentation
 
-- Custom nameservers / CoreDNS — https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/
-- DNS debugging & resolution — https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/
+- Custom nameservers / CoreDNS - https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/
+- DNS debugging & resolution - https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/

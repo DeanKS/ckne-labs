@@ -12,6 +12,6 @@ check "llm-vllm LLMInferenceService exists (if you deployed it)" \
 
 echo "---"; echo "${pass} passed, ${fail} failed"
 echo "Note: full readiness/functional verification of this stack needs GPU-backed nodes"
-echo "and is not reproducible in a bare Kind cluster — this check only confirms the CRDs"
+echo "and is not reproducible in a bare Kind cluster - this check only confirms the CRDs"
 echo "and object exist."
 exit $fail

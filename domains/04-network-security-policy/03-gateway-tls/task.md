@@ -25,8 +25,8 @@
 
 ## Official documentation
 
-- Gateway API TLS guide — https://gateway-api.sigs.k8s.io/guides/user-guides/tls/
-- BackendTLSPolicy reference — https://gateway-api.sigs.k8s.io/reference/api-types/policy/backendtlspolicy/
-- Configure a Pod's ServiceAccount — https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
-- RBAC reference — https://kubernetes.io/docs/reference/access-authn-authz/rbac/
-- Cilium mutual authentication — https://docs.cilium.io/en/stable/network/servicemesh/mutual-authentication/mutual-authentication/
+- Gateway API TLS guide - https://gateway-api.sigs.k8s.io/guides/user-guides/tls/
+- BackendTLSPolicy reference - https://gateway-api.sigs.k8s.io/reference/api-types/policy/backendtlspolicy/
+- Configure a Pod's ServiceAccount - https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
+- RBAC reference - https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+- Cilium mutual authentication - https://docs.cilium.io/en/stable/network/servicemesh/mutual-authentication/mutual-authentication/

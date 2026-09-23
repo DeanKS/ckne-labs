@@ -2,7 +2,7 @@
 
 ## Order of operations matters
 
-Apply default-deny *and* the explicit allows in the same batch, not default-deny first and allows "later" — between those two steps, DNS breaks for every pod in the namespace and anything mid-flight can look like a false failure during testing.
+Apply default-deny *and* the explicit allows in the same batch, not default-deny first and allows "later" - between those two steps, DNS breaks for every pod in the namespace and anything mid-flight can look like a false failure during testing.
 
 ## Manifests
 
@@ -51,7 +51,7 @@ spec:
     - protocol: TCP
       port: 5432
 ---
-# 4. Egress allowed FROM frontend and backend TO db/backend respectively — the mirror side
+# 4. Egress allowed FROM frontend and backend TO db/backend respectively - the mirror side
 #    of policies 2/3, since NetworkPolicy ingress rules don't imply the source's egress is open
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -101,10 +101,10 @@ spec:
 
 ## The mistake almost everyone makes here
 
-`NetworkPolicy` ingress and egress rules are evaluated independently per pod — allowing ingress *to* `backend` from `frontend` does **not** automatically allow egress *from* `frontend`. Both sides of the connection need a matching rule once default-deny egress is in effect on the source pod. That's why policy #4 exists separately from #2/#3 — a common exam trap is writing only the ingress-side allow and being confused why traffic still doesn't flow.
+`NetworkPolicy` ingress and egress rules are evaluated independently per pod - allowing ingress *to* `backend` from `frontend` does **not** automatically allow egress *from* `frontend`. Both sides of the connection need a matching rule once default-deny egress is in effect on the source pod. That's why policy #4 exists separately from #2/#3 - a common exam trap is writing only the ingress-side allow and being confused why traffic still doesn't flow.
 
 ## Common failure modes
 
-- Forgetting DNS egress entirely — once default-deny-egress is applied, every pod loses the ability to resolve `backend.secure-app.svc.cluster.local` or any external name, even though the actual data-plane rule you wrote is otherwise correct.
-- Using `kubernetes.io/metadata.name` for the `kube-system` namespaceSelector — this label is automatically applied by Kubernetes since 1.21+, but if you're on an old test cluster it might not exist; verify with `kubectl get ns kube-system --show-labels` before relying on it.
-- Not restricting `allow-external-to-frontend`'s `from` — leaving it unrestricted (as required here) is correct for "reachable from outside the cluster," but double check that's actually the requirement before doing it in a real environment.
+- Forgetting DNS egress entirely - once default-deny-egress is applied, every pod loses the ability to resolve `backend.secure-app.svc.cluster.local` or any external name, even though the actual data-plane rule you wrote is otherwise correct.
+- Using `kubernetes.io/metadata.name` for the `kube-system` namespaceSelector - this label is automatically applied by Kubernetes since 1.21+, but if you're on an old test cluster it might not exist; verify with `kubectl get ns kube-system --show-labels` before relying on it.
+- Not restricting `allow-external-to-frontend`'s `from` - leaving it unrestricted (as required here) is correct for "reachable from outside the cluster," but double check that's actually the requirement before doing it in a real environment.

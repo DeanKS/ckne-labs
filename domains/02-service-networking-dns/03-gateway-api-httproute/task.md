@@ -13,7 +13,7 @@ Two Services exist in namespace `gw-lab`: `orders-v1` and `orders-v2`, both serv
 2. Create an `HTTPRoute` attached to `public-gw` such that:
    - Requests to path prefix `/orders` with header `x-canary: true` go to `orders-v2`.
    - All other requests to `/orders` go to `orders-v1`.
-3. Do this without an `Ingress` resource — Gateway API only.
+3. Do this without an `Ingress` resource - Gateway API only.
 
 ## Success criteria
 
@@ -23,6 +23,6 @@ Two Services exist in namespace `gw-lab`: `orders-v1` and `orders-v2`, both serv
 
 ## Official documentation
 
-- Gateway API concept — https://kubernetes.io/docs/concepts/services-networking/gateway/
-- HTTPRoute reference — https://gateway-api.sigs.k8s.io/reference/api-types/httproute/
-- Ingress (for contrast with Gateway API) — https://kubernetes.io/docs/concepts/services-networking/ingress/
+- Gateway API concept - https://kubernetes.io/docs/concepts/services-networking/gateway/
+- HTTPRoute reference - https://gateway-api.sigs.k8s.io/reference/api-types/httproute/
+- Ingress (for contrast with Gateway API) - https://kubernetes.io/docs/concepts/services-networking/ingress/

@@ -5,7 +5,7 @@
 
 ## Context
 
-Security asked for evidence of exactly which connections are being blocked by the `NetworkPolicy` set from Domain 4, scenario 1 (`secure-app` namespace), over the last hour — not just "policy exists," but a log of actual denied flows: source, destination, port, and verdict.
+Security asked for evidence of exactly which connections are being blocked by the `NetworkPolicy` set from Domain 4, scenario 1 (`secure-app` namespace), over the last hour - not just "policy exists," but a log of actual denied flows: source, destination, port, and verdict.
 
 ## Task
 
@@ -15,5 +15,5 @@ Security asked for evidence of exactly which connections are being blocked by th
 
 ## Official documentation
 
-- Cilium/Hubble metrics — https://docs.cilium.io/en/stable/observability/metrics/
-- Resource usage monitoring — https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/
+- Cilium/Hubble metrics - https://docs.cilium.io/en/stable/observability/metrics/
+- Resource usage monitoring - https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/

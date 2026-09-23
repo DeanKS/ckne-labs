@@ -5,13 +5,13 @@ CNI_PLUGINS_VERSION="v1.5.1"
 
 # The secondary network in this scenario also uses the "bridge" CNI type, delegated to by
 # Multus. Kind's node image doesn't ship that binary by default (same gap as
-# domains/01-core-infra-cni/01-manual-cni-config) — install it here too, independent of
+# domains/01-core-infra-cni/01-manual-cni-config) - install it here too, independent of
 # whichever primary CNI (Cilium, Calico, etc.) is already running.
 ARCH=$(docker exec ckne-labs-worker uname -m)
 case "$ARCH" in
   aarch64) CNI_ARCH="arm64" ;;
   x86_64)  CNI_ARCH="amd64" ;;
-  *) echo "Unrecognized node architecture: $ARCH — install cni-plugins manually for this arch." >&2; exit 1 ;;
+  *) echo "Unrecognized node architecture: $ARCH - install cni-plugins manually for this arch." >&2; exit 1 ;;
 esac
 
 TMPDIR=$(mktemp -d)
