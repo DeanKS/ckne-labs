@@ -13,6 +13,15 @@ The cluster is already running with a primary CNI installed (default pod network
 2. Define a `NetworkAttachmentDefinition` named `storage-net` that attaches a secondary bridge `br1` on `192.168.100.0/24`.
 3. Launch a pod that has its normal `eth0` **and** a second interface `net1` on the storage network, using the `k8s.v1.cni.cncf.io/networks` annotation.
 
+Pod requirements:
+
+Name: `dual-homed-pod`
+Namespace: `default`
+Image: `nicolaka/netshoot`
+request storage-net as a secondary network using the `k8s.v1.cni.cncf.io/networks` annotation
+
+The Pod must have its normal eth0 interface and a second net1 interface connected to the storage network.
+
 ## Success criteria
 
 - `kubectl exec <pod> -- ip addr` shows both `eth0` and `net1`.
