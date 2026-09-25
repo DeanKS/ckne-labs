@@ -33,4 +33,4 @@ Check `endpoints[].conditions.ready` per-address - this is what kube-proxy (or t
 
 ## kube-proxy modes note (for the competency, not this specific bug)
 
-`kubectl -n kube-system get cm kube-proxy -o yaml | grep mode` tells you if you're on `iptables` or `ipvs` mode - or, if the CNI (Cilium) runs in kube-proxy replacement mode, kube-proxy may not be doing the work at all and you should check `cilium status | grep KubeProxyReplacement` instead. Don't assume iptables rules exist just because a Service does.
+`kubectl -n kube-system get cm kube-proxy -o yaml | grep mode` tells you if you're on `iptables` or `ipvs` mode - or, if the CNI (Cilium) runs in kube-proxy replacement mode, kube-proxy may not be doing the work at all and you should check `cilium config view | grep -i kube-proxy-replacement` instead. Don't assume iptables rules exist just because a Service does.
