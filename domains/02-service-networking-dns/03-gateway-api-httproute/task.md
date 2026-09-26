@@ -10,7 +10,7 @@ Two Services exist in namespace `gw-lab`: `orders-v1` and `orders-v2`, both serv
 ## Task
 
 1. Create a `Gateway` named `public-gw` listening on HTTP port 80.
-2. Create an `HTTPRoute` attached to `public-gw` such that:
+2. Create an `HTTPRoute` named `orders-route` attached to `public-gw` such that:
    - Requests to path prefix `/orders` with header `x-canary: true` go to `orders-v2`.
    - All other requests to `/orders` go to `orders-v1`.
 3. Do this without an `Ingress` resource - Gateway API only.
