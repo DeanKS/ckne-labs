@@ -9,7 +9,7 @@ Pods in namespace `ai-workload` call an external API at `203.0.113.0/24` that al
 
 ## Task
 
-Configure a `CiliumEgressGatewayPolicy` so that all traffic from pods in `ai-workload` destined for `203.0.113.0/24` egresses through one designated gateway node, using a specific egress IP (`10.168.60.100`, already assigned as a secondary address on that node).
+Configure a `CiliumEgressGatewayPolicy` named `egress-external-api` so that all traffic from pods in `ai-workload` destined for `203.0.113.0/24` egresses through one designated gateway node, using a specific egress IP (`10.168.60.100`, already assigned as a secondary address on that node).
 
 ## Success criteria
 
