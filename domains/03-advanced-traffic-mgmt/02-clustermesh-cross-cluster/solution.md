@@ -28,6 +28,23 @@ cilium clustermesh status --context cluster2
 ```bash
 kubectl --context cluster1 annotate service catalog-svc io.cilium/global-service="true"
 kubectl --context cluster2 annotate service catalog-svc io.cilium/global-service="true"
+
+or edit each service and add the annotations manually i.e.:
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalog
+  namespace: mesh-lab
+  annotations:
+    service.cilium.io/global: "true"
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: catalog
+
 ```
 
 Both sides need the annotation - a Global Service is an agreement between clusters, not a one-sided export.
