@@ -1,6 +1,6 @@
 # Scenario: Cilium ClusterMesh Global Services
 
-**WARNING:** This lab is very much a W.I.P. and is not currently stable to run as it creaes two clusters which can be highly unstable and taxing on system resources - run at your own risk!!!
+**WARNING:** This lab is very much a W.I.P. and is not currently stable to run as it creates two clusters which can be highly unstable and taxing on system resources - run at your own risk!!!
 
 **Domain:** Advanced Traffic Management (20%)
 **Competencies:** Implementing Cross-Cluster Service Discovery and Load Balancing
