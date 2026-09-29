@@ -1,4 +1,4 @@
-# CKNE Labs
+# CKNE Beta Labs
 
 Hands-on lab repository for the [Certified Kubernetes Network Engineer (CKNE)](https://training.linuxfoundation.org/certification/certified-kubernetes-network-engineer-ckne/) exam, structured the same way as community repos for CKA/CKAD/CKS (setup → task → solution → verify), but organized around CKNE's actual five domains and weights.
 
