@@ -1,6 +1,43 @@
 # Solution: Reading the Access Log
 
+
+Objective
+
+Use Cilium Gateway API access logs to identify which user/client accessed which endpoint through the Gateway.
+
+The important troubleshooting concept is:
+
+The application Pod does not necessarily contain the Gateway access logs. Cilium Gateway API traffic is handled by Envoy, and Gateway access logs are emitted by Envoy.
+
+Therefore, if:
+
+`kubectl logs <application-pod>`
+
+does not show the request, that does not mean the access log doesn't exist.
+
+You need to find the Envoy instance handling the Gateway traffic.
+
+
+
 ## 1. Gateway-level failures vs. successes
+
+
+Identify the Gateway
+
+First inspect the Gateway:
+
+`kubectl get gateway -A`
+
+
+
+kubectl describe gateway <gateway-name> -n <namespace>
+
+Check that the Gateway is:
+
+Accepted:   True
+Programmed: True
+
+A programmed Gateway means that Cilium has successfully translated the Gateway configuration for Envoy. Cilium's Gateway API troubleshooting documentation recommends checking the Gateway status and its Accepted, Programmed, and ResolvedRefs conditions.
 
 Non-2xx entries:
 
