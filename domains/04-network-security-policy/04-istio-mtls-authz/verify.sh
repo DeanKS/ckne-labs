@@ -1,16 +1,192 @@
 #!/usr/bin/env bash
 set -uo pipefail
-pass=0; fail=0
-check() { if eval "$2"; then echo "PASS: $1"; pass=$((pass+1)); else echo "FAIL: $1"; fail=$((fail+1)); fi; }
 
-check "PeerAuthentication 'default' exists in mesh-lab with STRICT mode" \
-  "kubectl -n mesh-lab get peerauthentication default -o jsonpath='{.spec.mtls.mode}' | grep -q STRICT"
-check "AuthorizationPolicy payments-allow-frontend-only exists" \
-  "kubectl -n mesh-lab get authorizationpolicy payments-allow-frontend-only >/dev/null 2>&1"
-check "AuthorizationPolicy references frontend-sa principal" \
-  "kubectl -n mesh-lab get authorizationpolicy payments-allow-frontend-only -o yaml | grep -q 'frontend-sa'"
+NAMESPACE="mesh-lab"
 
-echo "---"; echo "${pass} passed, ${fail} failed"
-echo "Note: full mTLS/authz behavior verification requires a running Istio mesh with sidecars"
-echo "injected - this check only confirms the policy objects exist and are shaped correctly."
-exit $fail
+pass=0
+fail=0
+
+###############################################################################
+# Result helpers
+###############################################################################
+
+pass_check() {
+  echo "PASS: $1"
+  pass=$((pass + 1))
+}
+
+fail_check() {
+  echo "FAIL: $1"
+  fail=$((fail + 1))
+}
+
+run_check() {
+  description="$1"
+  function_name="$2"
+
+  if "$function_name"; then
+    pass_check "$description"
+  else
+    fail_check "$description"
+  fi
+}
+
+###############################################################################
+# PeerAuthentication
+###############################################################################
+
+check_strict_mtls() {
+  kubectl -n "$NAMESPACE" get peerauthentication -o jsonpath='{range .items[*]}{.spec.mtls.mode}{"\n"}{end}' 2>/dev/null |
+    grep -Fxq "STRICT"
+}
+
+###############################################################################
+# AuthorizationPolicy discovery
+#
+# We deliberately do NOT require a particular metadata.name.
+#
+# The policy must:
+#   - select app=payments
+#   - use ALLOW
+#   - contain the frontend service-account principal
+###############################################################################
+
+find_payments_policy() {
+  kubectl -n "$NAMESPACE" get authorizationpolicy \
+    -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' \
+    2>/dev/null
+}
+
+check_payments_policy_exists() {
+  policy="$(
+    find_payments_policy |
+      while read -r name; do
+
+        selector="$(
+          kubectl -n "$NAMESPACE" get authorizationpolicy "$name" \
+            -o jsonpath='{.spec.selector.matchLabels.app}' \
+            2>/dev/null
+        )"
+
+        if [[ "$selector" == "payments" ]]; then
+          echo "$name"
+          exit 0
+        fi
+
+      done
+  )"
+
+  [[ -n "$policy" ]]
+}
+
+get_payments_policy() {
+  find_payments_policy |
+    while read -r name; do
+
+      selector="$(
+        kubectl -n "$NAMESPACE" get authorizationpolicy "$name" \
+          -o jsonpath='{.spec.selector.matchLabels.app}' \
+          2>/dev/null
+      )"
+
+      if [[ "$selector" == "payments" ]]; then
+        echo "$name"
+        exit 0
+      fi
+
+    done
+}
+
+check_payments_selector() {
+  policy="$(get_payments_policy)"
+
+  [[ -n "$policy" ]] || return 1
+
+  selector="$(
+    kubectl -n "$NAMESPACE" get authorizationpolicy "$policy" \
+      -o jsonpath='{.spec.selector.matchLabels.app}' \
+      2>/dev/null
+  )"
+
+  [[ "$selector" == "payments" ]]
+}
+
+check_payments_allow() {
+  policy="$(get_payments_policy)"
+
+  [[ -n "$policy" ]] || return 1
+
+  action="$(
+    kubectl -n "$NAMESPACE" get authorizationpolicy "$policy" \
+      -o jsonpath='{.spec.action}' \
+      2>/dev/null
+  )"
+
+  # Istio's default action is ALLOW when action is omitted.
+  [[ -z "$action" || "$action" == "ALLOW" ]]
+}
+
+check_frontend_principal() {
+  policy="$(get_payments_policy)"
+
+  [[ -n "$policy" ]] || return 1
+
+  principal="cluster.local/ns/${NAMESPACE}/sa/frontend-sa"
+
+  kubectl -n "$NAMESPACE" get authorizationpolicy "$policy" \
+    -o jsonpath='{range .spec.rules[*].from[*].source.principals[*]}{.}{"\n"}{end}' \
+    2>/dev/null |
+    grep -Fxq "$principal"
+}
+
+###############################################################################
+# Verification
+###############################################################################
+
+echo "=============================================="
+echo " Istio Ambient mTLS/AuthZ Verification"
+echo "=============================================="
+echo
+
+echo "==> PeerAuthentication"
+
+run_check \
+  "A PeerAuthentication enables STRICT mTLS in mesh-lab" \
+  check_strict_mtls
+
+echo
+echo "==> AuthorizationPolicy"
+
+run_check \
+  "An AuthorizationPolicy targets the payments workload" \
+  check_payments_policy_exists
+
+run_check \
+  "The payments AuthorizationPolicy selects app=payments" \
+  check_payments_selector
+
+run_check \
+  "The payments AuthorizationPolicy uses ALLOW semantics" \
+  check_payments_allow
+
+run_check \
+  "The payments AuthorizationPolicy allows frontend-sa" \
+  check_frontend_principal
+
+###############################################################################
+# Summary
+###############################################################################
+
+echo
+echo "---"
+echo "${pass} passed, ${fail} failed"
+
+if [[ "$fail" -eq 0 ]]; then
+  echo
+  echo "All mTLS and authorization policy checks passed."
+else
+  echo
+  echo "One or more mTLS/authz checks failed."
+fi
+
+exit "$fail"
