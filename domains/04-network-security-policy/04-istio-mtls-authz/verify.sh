@@ -36,7 +36,9 @@ run_check() {
 ###############################################################################
 
 check_strict_mtls() {
-  kubectl -n "$NAMESPACE" get peerauthentication -o jsonpath='{range .items[*]}{.spec.mtls.mode}{"\n"}{end}' 2>/dev/null |
+  kubectl -n "$NAMESPACE" get peerauthentication \
+    -o jsonpath='{range .items[*]}{.spec.mtls.mode}{"\n"}{end}' \
+    2>/dev/null |
     grep -Fxq "STRICT"
 }
 
@@ -57,28 +59,6 @@ find_payments_policy() {
     2>/dev/null
 }
 
-check_payments_policy_exists() {
-  policy="$(
-    find_payments_policy |
-      while read -r name; do
-
-        selector="$(
-          kubectl -n "$NAMESPACE" get authorizationpolicy "$name" \
-            -o jsonpath='{.spec.selector.matchLabels.app}' \
-            2>/dev/null
-        )"
-
-        if [[ "$selector" == "payments" ]]; then
-          echo "$name"
-          exit 0
-        fi
-
-      done
-  )"
-
-  [[ -n "$policy" ]]
-}
-
 get_payments_policy() {
   find_payments_policy |
     while read -r name; do
@@ -95,6 +75,12 @@ get_payments_policy() {
       fi
 
     done
+}
+
+check_payments_policy_exists() {
+  policy="$(get_payments_policy)"
+
+  [[ -n "$policy" ]]
 }
 
 check_payments_selector() {
@@ -134,9 +120,24 @@ check_frontend_principal() {
   principal="cluster.local/ns/${NAMESPACE}/sa/frontend-sa"
 
   kubectl -n "$NAMESPACE" get authorizationpolicy "$policy" \
-    -o jsonpath='{range .spec.rules[*].from[*].source.principals[*]}{.}{"\n"}{end}' \
+    -o jsonpath='{.spec.rules[*].from[*].source.principals[*]}' \
     2>/dev/null |
+    tr ' ' '\n' |
     grep -Fxq "$principal"
+}
+
+check_no_namespace_wide_allow() {
+  policy="$(get_payments_policy)"
+
+  [[ -n "$policy" ]] || return 1
+
+  namespace_rule="$(
+    kubectl -n "$NAMESPACE" get authorizationpolicy "$policy" \
+      -o jsonpath='{.spec.rules[*].from[*].source.namespaces[*]}' \
+      2>/dev/null
+  )"
+
+  [[ -z "$namespace_rule" ]]
 }
 
 ###############################################################################
@@ -172,6 +173,10 @@ run_check \
 run_check \
   "The payments AuthorizationPolicy allows frontend-sa" \
   check_frontend_principal
+
+run_check \
+  "The payments AuthorizationPolicy does not allow the entire mesh-lab namespace" \
+  check_no_namespace_wide_allow
 
 ###############################################################################
 # Summary
